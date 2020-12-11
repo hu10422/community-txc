@@ -1,0 +1,28 @@
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为80
+  port: 80
+
+# Spring配置
+spring:
+  # 模板引擎
+  thymeleaf:
+    mode: HTML
+    encoding: utf-8
+    # 禁用缓存
+    cache: false
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+
+# 兔小巢配置
+rabbon:
+  productUrl: https://support.qq.com/product/{0}
+  #你的产品名称
+  productName: productName
+  #你的产品ID
+  productId: productId
+  #你的产品密钥
+  privateKey: privateKey
+
