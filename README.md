@@ -34,7 +34,5 @@
 
 ![回复反馈](http://blog.tanpu.top/image2/txc/5.png)
 
-![回复提醒](http://blog.tanpu.top/image2/txc/6.jpg)
-
-![回复通知](http://blog.tanpu.top/image2/txc/7.jpg)
+![微信通知](http://blog.tanpu.top/image2/txc/4.png)
 
