@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
             user.setUsername(userDto.getUsername());
             user.setPassword(userDto.getPassword());
             user.setNickname("TXC" + RandomUtil.randomInt(1001, 9999));
-            user.setOpenId("TXCB" + System.currentTimeMillis() + RandomUtil.randomInt(11, 99));
+            user.setOpenid("TXCB" + System.currentTimeMillis() + RandomUtil.randomInt(11, 99));
             user.setAvatar(ImageListUtil.getImgUrl());
             CacheManager.getTimedCache().put(userDto.getUsername(), JSONUtil.toJsonStr(user), CacheManager.defaultTimeOutHour * 2);
         } else {

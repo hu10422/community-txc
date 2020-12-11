@@ -10,15 +10,85 @@
     <h1 class="site-h1">接入腾讯"兔小巢"示例</h1>
     <hr>
     <blockquote class="layui-elem-quote">注意：下述演示中的颜色只是做一个区分作用，并非栅格内置。</blockquote>
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>方框风格的表单集合</legend>
+    </fieldset>
+    <form class="layui-form" lay-filter="example">
+        <div class="layui-form-item">
+            <label class="layui-form-label">唯一ID</label>
+            <div class="layui-input-inline">
+                <input type="text" name="openid" id="openid" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-inline">
+                <input type="text" id="nickname" name="nickname" lay-verify="required" placeholder="请输入"
+                       autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">头像图片地址</label>
+            <div class="layui-input-block">
+                <input type="text" id="avatar" name="avatar" lay-verify="required" placeholder="请输入" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">随机赋值</button>
+                <button class="layui-btn" lay-submit="" lay-filter="demo2">跳转到社区</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <script src="../layui/layui.js"></script>
+<script src="../tc/tucao.js"></script>
+<script src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
 <script>
     layui.use(['layer', 'form'], function () {
         var layer = layui.layer,
             form = layui.form;
 
-        layer.msg('Hello World');
+
+
+        //表单赋值
+        layui.$('#LAY-component-form-setval').on('click', function () {
+            $.ajax({
+                url: "/api/user/getRabbitInfo",
+                type: "GET",
+                success: function (data) {
+                    var code = data.code;
+                    if (code == 200) {
+                        form.val('example', {
+                            "nickname": data.data.nickname,
+                            "openid": data.data.openid,
+                            "avatar": data.data.avatar
+                        });
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                }
+            });
+        });
+
+
+        //监听提交
+        form.on('submit(demo2)', function (data) {
+            var productId = 298490;
+            Tucao.request(productId, data.field);
+            return false;
+        });
     });
 </script>
 </body>
