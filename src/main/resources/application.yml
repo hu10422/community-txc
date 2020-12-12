@@ -5,6 +5,8 @@ server:
 
 # SpringÅäÖÃ
 spring:
+  profiles:
+    active: dev
   # Ä£°åÒıÇæ
   thymeleaf:
     mode: HTML
