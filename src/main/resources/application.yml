@@ -5,6 +5,8 @@ server:
 
 # Spring配置
 spring:
+  profiles:
+    active: dev
   # 模板引擎
   thymeleaf:
     mode: HTML
@@ -17,7 +19,7 @@ spring:
       enabled: true
 
 # 兔小巢配置
-rabbon:
+txc:
   productUrl: https://support.qq.com/product/{0}
   #你的产品名称
   productName: productName

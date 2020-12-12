@@ -9,47 +9,27 @@
 <div class="layui-container">
     <h1 class="site-h1">接入腾讯"兔小巢"示例</h1>
     <hr>
-    <blockquote class="layui-elem-quote">注意：下述演示中的颜色只是做一个区分作用，并非栅格内置。</blockquote>
+
 
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-        <legend>方框风格的表单集合</legend>
+        <legend>前往社区</legend>
     </fieldset>
     <form class="layui-form" lay-filter="example">
-        <div class="layui-form-item">
-            <label class="layui-form-label">唯一ID</label>
-            <div class="layui-input-inline">
-                <input type="text" name="openid" id="openid" lay-verify="required" placeholder="请输入" autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
+        <blockquote class="layui-elem-quote">注意：“随机登录状态”指后台生成基本信息，“无登录状态”指跳转社区后需要使用微信、QQ 登录</blockquote>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">昵称</label>
-            <div class="layui-input-inline">
-                <input type="text" id="nickname" name="nickname" lay-verify="required" placeholder="请输入"
-                       autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">头像图片地址</label>
-            <div class="layui-input-block">
-                <input type="text" id="avatar" name="avatar" lay-verify="required" placeholder="请输入" autocomplete="off"
-                       class="layui-input">
-            </div>
-        </div>
-
-
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">随机赋值</button>
-                <button class="layui-btn" lay-submit="" lay-filter="demo2">跳转到社区</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-            </div>
+            <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval">随机登录状态跳转到社区
+            </button>
+            <button type="button" class="layui-btn layui-btn-normal" id="LAY-component-form-setval2">无登录状态跳转到社区
+            </button>
         </div>
     </form>
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>获取的反馈列表 - 服务端主动获取</legend>
+    </fieldset>
+
+
 </div>
 
 <script src="../layui/layui.js"></script>
@@ -60,21 +40,31 @@
         var layer = layui.layer,
             form = layui.form;
 
+        var productId = 0;
 
+        //获取产品信息，兔小巢产品ID
+        $.ajax({
+            url: "/api/txc/info",
+            type: "GET",
+            success: function (data) {
+                var code = data.code;
+                if (code == 200) {
+                    productId = data.data.productId;
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
 
-        //表单赋值
+        //随机登录状态跳转到社区
         layui.$('#LAY-component-form-setval').on('click', function () {
             $.ajax({
-                url: "/api/user/getRabbitInfo",
+                url: "/api/txc/userInfo",
                 type: "GET",
                 success: function (data) {
                     var code = data.code;
                     if (code == 200) {
-                        form.val('example', {
-                            "nickname": data.data.nickname,
-                            "openid": data.data.openid,
-                            "avatar": data.data.avatar
-                        });
+                        Tucao.request(productId, data.data);
                     } else {
                         layer.msg(data.msg);
                     }
@@ -82,14 +72,14 @@
             });
         });
 
-
-        //监听提交
-        form.on('submit(demo2)', function (data) {
-            var productId = 298490;
-            Tucao.request(productId, data.field);
-            return false;
+        //无登录状态跳转到社区
+        layui.$('#LAY-component-form-setval2').on('click', function () {
+            Tucao.request(productId, {});
         });
+
     });
+
+
 </script>
 </body>
 </html>

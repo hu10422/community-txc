@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "rabbit")
+@ConfigurationProperties(prefix = "txc")
 //@PropertySource(value = "config.properties")
-public class RabbitConfig {
+public class TxcConfig {
 
     /**
      * 产品名称

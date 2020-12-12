@@ -17,12 +17,30 @@ public class ImageListUtil {
     private static String imgUrl = "https://hu10422.github.io/image2/pic/{}.jpg";
 
     /**
-     * 随机获取一个头像地址
+     * 随机获取一个图片序号
+     *
+     * @return
+     */
+    public static Integer getImgKey() {
+        return RandomUtil.randomInt(1, 9);
+    }
+
+    /**
+     * 通过图片序号获取一个图片地址
+     *
+     * @param key
+     * @return
+     */
+    public static String getImgUrl(Integer key) {
+        return StrUtil.format(imgUrl, key);
+    }
+
+    /**
+     * 直接随机获取一个头像地址
      *
      * @return
      */
     public static String getImgUrl() {
-        int i = RandomUtil.randomInt(1, 9);
-        return StrUtil.format(imgUrl, i);
+        return getImgUrl(getImgKey());
     }
 }
