@@ -40,7 +40,21 @@
         var layer = layui.layer,
             form = layui.form;
 
-        var productId = init();
+        var productId = 0;
+
+        //获取产品信息，兔小巢产品ID
+        $.ajax({
+            url: "/api/txc/info",
+            type: "GET",
+            success: function (data) {
+                var code = data.code;
+                if (code == 200) {
+                    productId = data.data.productId;
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
+        });
 
         //随机登录状态跳转到社区
         layui.$('#LAY-component-form-setval').on('click', function () {
@@ -65,21 +79,7 @@
 
     });
 
-    var init = function () {
-        $.ajax({
-            url: "/api/txc/info",
-            type: "GET",
-            success: function (data) {
-                var code = data.code;
-                if (code == 200) {
-                    return data.data.productId;
-                } else {
-                    layer.msg(data.msg);
-                }
-            }
-        });
-        return 0;
-    }
+
 </script>
 </body>
 </html>

@@ -19,7 +19,7 @@ spring:
       enabled: true
 
 # 兔小巢配置
-rabbon:
+txc:
   productUrl: https://support.qq.com/product/{0}
   #你的产品名称
   productName: productName
