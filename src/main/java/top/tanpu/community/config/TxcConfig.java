@@ -32,4 +32,5 @@ public class TxcConfig {
      * 产品密钥
      */
     private String privateKey;
+
 }
