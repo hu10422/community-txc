@@ -1,15 +1,15 @@
-package top.tanpu.community;
+package top.tanpu.community.service;
 
+import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import top.tanpu.community.service.TxcService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class CommunityApplicationTests {
+public class TxcServiceTest extends TestCase {
 
     @Autowired
     TxcService txcService;
@@ -18,5 +18,4 @@ class CommunityApplicationTests {
     public void contextLoads() {
         txcService.getFeedback();
     }
-
 }
