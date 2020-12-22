@@ -16,6 +16,12 @@ public class TxcServiceTest extends TestCase {
 
     @Test
     public void contextLoads() {
+
         txcService.getFeedback();
+    }
+
+    @Test
+    public void sslUtil(){
+
     }
 }
