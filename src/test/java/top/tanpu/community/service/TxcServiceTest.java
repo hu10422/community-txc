@@ -17,11 +17,15 @@ public class TxcServiceTest extends TestCase {
     @Test
     public void contextLoads() {
 
-        txcService.getFeedback();
+        try {
+            txcService.getFeedback();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void sslUtil(){
+    public void sslUtil() {
 
     }
 }
