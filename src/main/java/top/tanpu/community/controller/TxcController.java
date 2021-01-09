@@ -4,7 +4,6 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,10 +41,12 @@ public class TxcController {
     @GetMapping("/userInfo")
     public JsonResp userInfo(@CookieValue(value = "sessionId", required = false) String sessionId, HttpServletResponse response) {
         log.info("获取访问“兔小巢”页面的登录态信息");
-        TxcUserInfo userInfo = TxcUserInfo.toTxcUserInfo(sessionId);//将cookie保存的信息解析出来，无效数据则重新生成
+        //将cookie保存的信息解析出来，无效数据则重新生成
+        TxcUserInfo userInfo = TxcUserInfo.toTxcUserInfo(sessionId);
 
         Cookie cookie = new Cookie("sessionId", TxcUserInfo.toCookieInfoStr(userInfo));
-        cookie.setMaxAge(60 * 60 * 24 * 7);//cookie 保存7天
+        //cookie 保存7天
+        cookie.setMaxAge(60 * 60 * 24 * 7);
         response.addCookie(cookie);
 
         return JsonResp.suc(userInfo);
